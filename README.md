@@ -10,7 +10,7 @@ Power Fx- Formulas for filtering, saving data, and error handling,
 Security roles- Control who can see and do what,
 Power Automate Flow- Sends an email to the manager when a high priority case is created,
 Power BI- Report that shows case trends, priority, and resolution time.
-3. Key Design Decisions
+3. Key Design Decisions - 
 Dataverse instead of SharePoint or Excel: Dataverse gives me real relationships between tables and built-in security.
 Two apps for two needs: The model-driven app is best for office work with lots of data. The canvas app is best for a simple mobile screen.
 Business Process Flow: It guides agents step by step, so no one skips a step.
@@ -18,7 +18,7 @@ Three security roles: Agents do daily work, managers see more, and read-only use
 Status choices without "Closed": I use New, In Progress, Waiting on Customer, and Resolved.
 Named formula for theme colors: I change colors in one place, and the whole canvas app updates.
 Role-based screen: The manager screen is hidden from agents so they cannot see it.
-4. What was Delivered
+4. What was Delivered? 
 A. Data Model (Dataverse)
 Created 5 tables: Product, Customer Account, Case, Case Note, SLA Policy
 Set up relationships between the tables
