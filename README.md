@@ -1,5 +1,7 @@
+
 1. What is SupportHub?
 SupportHub is a simple customer support (case management) system that I built using Microsoft Power Platform and Dataverse. Support agents can log customer problems (called "cases"), follow them through a clear process, and close them when they are solved. Managers can see how many cases are open and how urgent they are. Agents can also use a mobile app to work on cases on the go. I built this project to practice and show my hands-on skills in Power Platform and Dynamics 365.
+
 2. Tools Used- What I used it for
 Microsoft Dataverse- Store all data (tables, relationships, security roles)
 Model-driven app- Main app for agents ("SupportHub Agent")
@@ -10,14 +12,19 @@ Power Fx- Formulas for filtering, saving data, and error handling
 Security roles- Control who can see and do what
 Power Automate Flow- Sends an email to the manager when a high priority case is created.
 Power BI- Report that shows case trends, priority, and resolution time.
+
 3. Key Design Decisions
+
 Dataverse instead of SharePoint or Excel: Dataverse gives me real relationships between tables and built-in security.
 Two apps for two needs: The model-driven app is best for office work with lots of data. The canvas app is best for a simple mobile screen.
+
 Business Process Flow: It guides agents step by step, so no one skips a step.
 Three security roles: Agents do daily work, managers see more, and read-only users can only look. This follows the "least access" rule.
+
 Status choices without "Closed": I use New, In Progress, Waiting on Customer, and Resolved. [Explain why in one sentence.]
 Named formula for theme colors: I change colors in one place, and the whole canvas app updates.
 Role-based screen: The manager screen is hidden from agents so they cannot see it.
+
 4. What was Delivered
 
 A. Data Model (Dataverse)
