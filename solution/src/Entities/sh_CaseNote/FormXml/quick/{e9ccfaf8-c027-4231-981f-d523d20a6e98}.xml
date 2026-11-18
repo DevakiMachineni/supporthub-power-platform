@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{e9ccfaf8-c027-4231-981f-d523d20a6e98}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{C4C70488-54CE-40A2-8427-DC75803F50B7}" IsUserDefined="1">
+          <labels>
+            <label description="" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{4D794AAE-442A-44A6-AF19-0E2826656DA3}">
+                  <labels>
+                    <label description="GENERAL" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{C1F7C6AF-C8AF-46C4-8AA3-9E81BE19C967}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="sh_notesummary" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="sh_NoteSummary" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{F842679C-E203-4B8C-8D34-01991966393A}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3e4f5604-06bf-4e2d-b4cf-a46bfdeb8dd4}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Case" languagecode="1033" />
+                        </labels>
+                        <control id="sh_case" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="sh_case" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ab17ab20-88a0-4b8a-9858-47bc4cbe508b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Created On" languagecode="1033" />
+                        </labels>
+                        <control id="createdon" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="createdon" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f4976ad3-260f-4cab-b73d-2bb905b27ecb}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Note Type" languagecode="1033" />
+                        </labels>
+                        <control id="sh_notetype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="sh_notetype" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6afbe261-fdee-446e-b4ea-1a2c2e2d47c3}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Status" languagecode="1033" />
+                        </labels>
+                        <control id="statecode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{650862c5-8b94-45f2-9471-5d1fe5106fa0}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Note Text" languagecode="1033" />
+                        </labels>
+                        <control id="sh_notetext" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="sh_notetext" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{326519b1-8c97-4c5c-8b85-9a97b37b5b9f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Created By" languagecode="1033" />
+                        </labels>
+                        <control id="createdby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="createdby" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+  </systemform>
+</forms>

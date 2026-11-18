@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{9368fed0-b2d7-4643-b8e4-9354718a62c6}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{C47E7572-C2AC-4643-B03E-CC8E5F19848E}" IsUserDefined="1">
+          <labels>
+            <label description="" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{A99389D8-1410-4FE8-B3BB-945E792A687B}">
+                  <labels>
+                    <label description="GENERAL" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{20336B36-2C55-469A-97EE-C61E2B539F42}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="sh_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="sh_Name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{FFA6A7A4-3AA4-4067-BBAF-1D8EE97C42AC}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d555db53-5657-48e0-9bd7-a5113c28993e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Active" languagecode="1033" />
+                        </labels>
+                        <control id="sh_active" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="sh_active" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f9a7d6f4-146f-48f2-8200-6ea6693fdb29}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Created By" languagecode="1033" />
+                        </labels>
+                        <control id="createdby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="createdby" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7bc23c2d-3f34-48c1-9004-587f998cfbac}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Created On" languagecode="1033" />
+                        </labels>
+                        <control id="createdon" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="createdon" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3c12d02f-2042-482c-9288-a518cfe6a374}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="sh_name" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="sh_name" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ffb4e83b-0ca9-4d1a-8f27-9cf375780dbd}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Priority" languagecode="1033" />
+                        </labels>
+                        <control id="sh_priority" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="sh_priority" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{75012a89-56f9-4ead-8e63-14015b5e2c80}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Resolution Hours" languagecode="1033" />
+                        </labels>
+                        <control id="sh_resolutionhours" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="sh_resolutionhours" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{656cfb8a-cd50-48f0-a444-aede53f8424b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Response Hours" languagecode="1033" />
+                        </labels>
+                        <control id="sh_responsehours" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="sh_responsehours" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0085dd32-9620-43e7-8a42-81b54f32dbf5}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Status" languagecode="1033" />
+                        </labels>
+                        <control id="statecode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+  </systemform>
+</forms>

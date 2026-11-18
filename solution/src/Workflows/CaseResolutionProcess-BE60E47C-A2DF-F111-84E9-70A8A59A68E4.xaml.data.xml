@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{be60e47c-a2df-f111-84e9-70a8a59a68e4}" Name="Case Resolution Process" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <XamlFileName>/Workflows/CaseResolutionProcess-BE60E47C-A2DF-F111-84E9-70A8A59A68E4.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>4</Category>
+  <Mode>0</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>1</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <processorder>100</processorder>
+  <RunAs>1</RunAs>
+  <UniqueName>sh_caseresolutionprocess</UniqueName>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+  <ProcessTriggerScope>1</ProcessTriggerScope>
+  <ModernFlowType>0</ModernFlowType>
+  <PrimaryEntity>sh_Case</PrimaryEntity>
+  <LocalizedNames>
+    <LocalizedName languagecode="1033" description="Case Resolution Process" />
+  </LocalizedNames>
+  <labels>
+    <steplabels id="{57934ae9-0e65-43a0-bf02-4a2e93c82e23}">
+      <label languagecode="1033" description="Open" />
+    </steplabels>
+    <steplabels id="{2027b1ea-bb75-4a5b-85ee-e9c40fa6a4c1}">
+      <label languagecode="1033" description="Case Number" />
+    </steplabels>
+    <steplabels id="{a1621b33-da7c-4a10-8b39-0369757ca8e7}">
+      <label languagecode="1033" description="Customer" />
+    </steplabels>
+    <steplabels id="{50138980-3341-4e6e-97ea-35181a361152}">
+      <label languagecode="1033" description="Priority" />
+    </steplabels>
+    <steplabels id="{2daca65e-6749-4478-b500-033699cd2507}">
+      <label languagecode="1033" description="Investigate" />
+    </steplabels>
+    <steplabels id="{d277fc52-1107-4bcd-9134-4c0432f17cf6}">
+      <label languagecode="1033" description="Product" />
+    </steplabels>
+    <steplabels id="{0613c954-3010-4309-9167-e8b0fde31e2c}">
+      <label languagecode="1033" description="Description" />
+    </steplabels>
+    <steplabels id="{3c8e2847-66f3-4c14-8eb4-9e0238ce95f3}">
+      <label languagecode="1033" description="Investigation Notes" />
+    </steplabels>
+    <steplabels id="{bbe61cd9-873d-40ad-a612-a94e75b34411}">
+      <label languagecode="1033" description="Resolve" />
+    </steplabels>
+    <steplabels id="{c8e6d260-a49f-48da-8845-a105afa91fc4}">
+      <label languagecode="1033" description="Resolution Details" />
+    </steplabels>
+    <steplabels id="{960ab940-f7b6-4914-b9a7-25c74b0efe3f}">
+      <label languagecode="1033" description="Status" />
+    </steplabels>
+    <steplabels id="{ee16afd8-34ad-4012-8b09-fd6092d55e55}">
+      <label languagecode="1033" description="Status Reason" />
+    </steplabels>
+    <steplabels id="{9b6fda51-3ae9-4566-85c9-86765b625007}">
+      <label languagecode="1033" description="Close" />
+    </steplabels>
+    <steplabels id="{59fd90ad-c0c3-48c4-a32d-a4a8936fdbaf}">
+      <label languagecode="1033" description="Resolution Confirmed" />
+    </steplabels>
+    <steplabels id="{d447ae79-49d1-4588-aad9-a439dc0efd17}">
+      <label languagecode="1033" description="Status" />
+    </steplabels>
+    <steplabels id="{44438e91-ba0c-4c3c-9f52-0aae0ccf2338}">
+      <label languagecode="1033" description="Resolved On" />
+    </steplabels>
+  </labels>
+</Workflow>

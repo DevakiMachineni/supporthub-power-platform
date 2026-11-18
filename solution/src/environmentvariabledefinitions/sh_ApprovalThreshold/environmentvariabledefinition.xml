@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="sh_ApprovalThreshold">
+  <defaultvalue>500</defaultvalue>
+  <displayname default="Approval Threshold">
+    <label description="Approval Threshold" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000001</type>
+</environmentvariabledefinition>

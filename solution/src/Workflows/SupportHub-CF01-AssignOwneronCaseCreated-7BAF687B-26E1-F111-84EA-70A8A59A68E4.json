@@ -1,0 +1,252 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "sh_sharedcommondataserviceforapps_69677"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_outlook": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "sh_sharedoutlook_07083"
+        },
+        "api": {
+          "name": "shared_outlook"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "117979ba-c4e4-44ca-b40e-146aad54cdf1"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/entityname": "sh_case",
+              "subscriptionRequest/scope": 4
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Scope_-_Try": {
+          "actions": {
+            "Get_-_Product_Row": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "461fd417-843c-4c02-9895-db6552bea4f2"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "sh_products",
+                  "recordId": "@triggerOutputs()?['body/_sh_product_value']"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Switch_-_Owner_by_Priority": {
+              "runAfter": {
+                "Get_-_Product_Row": [
+                  "Succeeded"
+                ]
+              },
+              "cases": {
+                "Case": {
+                  "case": "126,450,003",
+                  "actions": {}
+                }
+              },
+              "default": {
+                "actions": {
+                  "Update_-_Case_Owner": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "ae7e5213-8d27-4f07-82df-286dd30607c8"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_commondataserviceforapps",
+                        "operationId": "UpdateOnlyRecord",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                      },
+                      "parameters": {
+                        "entityName": "sh_cases",
+                        "recordId": "@triggerOutputs()?['body/sh_caseid']",
+                        "item/ownerid@odata.bind": "0eafa09d-c6da-f111-84e8-000d3a5b1b39",
+                        "item/sh_status": 126450001
+                      },
+                      "authentication": "@parameters('$authentication')"
+                    }
+                  },
+                  "Send_-_owner_notification": {
+                    "runAfter": {
+                      "Update_-_Case_Owner": [
+                        "Succeeded"
+                      ]
+                    },
+                    "metadata": {
+                      "operationMetadataId": "4c3b1a7b-0d87-4533-91a8-4bd461609099"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_outlook",
+                        "operationId": "SendEmailV2",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_outlook"
+                      },
+                      "parameters": {
+                        "emailMessage/To": "devakimachineni_gmail.com#EXT#@devakimachinenigmail.onmicrosoft.com",
+                        "emailMessage/Subject": "@outputs('Update_-_Case_Owner')?['body/sh_casenumber']",
+                        "emailMessage/Body": "<p>Hello,<br>\n<br>\nA new support case has been assigned to you:<br>\n1. Case Number: CS-01000<br>\n2. Priority: Low<br>\n<br>\nOpen the case here:<br>\nhttps://org95cce365.crm.dynamics.com/main.aspx?appid=925479da-9bdf-f111-84e9-70a8a59a68e4&amp;pagetype=entityrecord&amp;etn=sh_case&amp;id=@{triggerOutputs()?['body/sh_case&amp;id=715b6ab8-93df-f111-84e9-70a8a59a68e4']}<br>\n<br>\nThank You,<br>\nDevaki Machineni.</p>",
+                        "emailMessage/Importance": "Normal"
+                      },
+                      "authentication": "@parameters('$authentication')"
+                    }
+                  }
+                }
+              },
+              "expression": "@triggerOutputs()?['body/sh_priority']",
+              "metadata": {
+                "operationMetadataId": "2f31c402-6db6-4d63-acd1-d81e0d655903"
+              },
+              "type": "Switch"
+            }
+          },
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "56603cad-baaf-4ad2-972b-4e62b24c5892"
+          },
+          "type": "Scope",
+          "description": "Wraps the core product lookup and priority based owner assignment logic so any runtime failures are captured for error handling."
+        },
+        "Scope_-_Catch": {
+          "actions": {
+            "Filter_array": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "0a27c70b-ce70-444a-8c63-d9ad00adb8db"
+              },
+              "type": "Query",
+              "inputs": {
+                "from": "@result('Scope_-_Try')",
+                "where": "@equals(item()?['status'], 'Failed')"
+              }
+            },
+            "Compose_-_Error_Details": {
+              "runAfter": {
+                "Filter_array": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "93c81dca-2e4d-484f-9a28-d1e8ff8074c4"
+              },
+              "type": "Compose",
+              "inputs": "Failed Action@{first(body('Filter_array'))?['name']}, Error Message@{first(body('Filter_array'))?['error']?['message']}, Failed Action@{first(body('Filter_array'))?['name']}"
+            },
+            "Add_a_new_row": {
+              "runAfter": {
+                "Compose_-_Error_Details": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "a8bc0be3-d09b-4c6f-963e-d49ced1ad0fc"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "sh_flowerrorlogs",
+                  "item/sh_errormessage": "@outputs('Compose_-_Error_Details')",
+                  "item/sh_name": "@workflow()?['tags']?['flowDisplayName']",
+                  "item/sh_runurl": "@concat('https://make.powerautomate.com/environments/', workflow()?['tags']?['environmentName'],'/flows/', workflow()?['name'],'/runs/', workflow()?['run']?['name'])",
+                  "item/utcconversiontimezonecode": "@utcNow()"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Terminate": {
+              "runAfter": {
+                "Add_a_new_row": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "2aa2b274-ff25-4d1e-b4e5-26c6f228ac43"
+              },
+              "type": "Terminate",
+              "inputs": {
+                "runStatus": "Failed",
+                "runError": {
+                  "code": "500",
+                  "message": "@{outputs('Compose_-_Error_Details')}"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Scope_-_Try": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d711ea25-983d-4e24-a24f-6471f615d77a"
+          },
+          "type": "Scope"
+        },
+        "Scope_-_Finally": {
+          "actions": {},
+          "runAfter": {
+            "Scope_-_Catch": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "07e23b5b-be62-4079-ae43-5863404c48ca"
+          },
+          "type": "Scope"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{07b16cae-9edf-f111-84e9-70a8a59a68e4}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="sh_casenumber" select="1" icon="1" preview="1">
+        <row name="result" id="sh_caseid">
+          <cell name="sh_casenumber" width="128" />
+          <cell name="createdon" width="125" />
+          <cell name="sh_customer" width="100" />
+          <cell name="sh_priority" width="100" />
+          <cell name="sh_status" width="84" />
+          <cell name="ownerid" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical" distinct="true">
+        <entity name="sh_case">
+          <attribute name="sh_caseid" />
+          <attribute name="sh_casenumber" />
+          <attribute name="createdon" />
+          <order attribute="sh_casenumber" descending="false" />
+          <attribute name="sh_customer" />
+          <attribute name="sh_priority" />
+          <attribute name="sh_status" />
+          <attribute name="ownerid" />
+          <filter type="and">
+            <condition attribute="sh_status" operator="eq" value="126450003" />
+            <condition attribute="ownerid" operator="eq-userid" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="My Open Cases" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

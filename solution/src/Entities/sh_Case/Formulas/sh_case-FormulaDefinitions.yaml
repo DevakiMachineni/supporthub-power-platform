@@ -1,0 +1,1 @@
+sh_sladuedate: =DateAdd(createdon, sh_SLAPolicy. sh_resolutionhours, TimeUnit.Hours)

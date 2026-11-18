@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{ae50d836-bb17-41ac-937b-7f0addcee970}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{57934ae9-0e65-43a0-bf02-4a2e93c82e23}" name="StageStep3" locklevel="0" expanded="true" visible="false" labelid="{30035d49-880a-4bc3-acdf-04f76208ebaa}">
+          <labels>
+            <label description="Open" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{edc10233-df49-a183-9222-bc7c1d433349}" name="StageStep3_section1" labelid="{8f19fb36-d81a-4ae2-9f6b-b7d3bd6352bd}">
+                  <labels>
+                    <label description="Open" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{2027b1ea-bb75-4a5b-85ee-e9c40fa6a4c1}" showlabel="true" visible="true" labelid="{1f16f1a0-9b1d-4451-a1dd-78fabd2735d2}">
+                        <labels>
+                          <label description="Case Number" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_sh_case_sh_caseresolutionprocess:sh_casenumber" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="sh_casenumber" relationship="bpf_sh_case_sh_caseresolutionprocess" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a1621b33-da7c-4a10-8b39-0369757ca8e7}" showlabel="true" visible="true" labelid="{e151633e-5b25-43fe-a1ce-a681430175e6}">
+                        <labels>
+                          <label description="Customer" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_sh_case_sh_caseresolutionprocess:sh_customer" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="sh_customer" relationship="bpf_sh_case_sh_caseresolutionprocess" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{50138980-3341-4e6e-97ea-35181a361152}" showlabel="true" visible="true" labelid="{e4ccef21-e04c-426b-825a-44059e6f31e1}">
+                        <labels>
+                          <label description="Priority" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_sh_case_sh_caseresolutionprocess:sh_priority" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="sh_priority" relationship="bpf_sh_case_sh_caseresolutionprocess" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{2daca65e-6749-4478-b500-033699cd2507}" name="StageStep11" locklevel="0" expanded="true" visible="false" labelid="{94aa9eb8-0239-4890-80f1-aaa80989ca2f}">
+          <labels>
+            <label description="Investigate" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{272ad587-c508-951b-596f-77d78cfb8015}" name="StageStep11_section1" labelid="{63720157-c3ea-44ba-9ce4-33219f46878d}">
+                  <labels>
+                    <label description="Investigate" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{d277fc52-1107-4bcd-9134-4c0432f17cf6}" showlabel="true" visible="true" labelid="{e87a5968-e864-4da8-b4ed-d6c81e623044}">
+                        <labels>
+                          <label description="Product" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_sh_case_sh_caseresolutionprocess:sh_product" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="sh_product" relationship="bpf_sh_case_sh_caseresolutionprocess" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0613c954-3010-4309-9167-e8b0fde31e2c}" showlabel="true" visible="true" labelid="{7cac7cad-1996-43e5-bbe6-697041288b98}">
+                        <labels>
+                          <label description="Description" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_sh_case_sh_caseresolutionprocess:sh_description" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="sh_description" relationship="bpf_sh_case_sh_caseresolutionprocess" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3c8e2847-66f3-4c14-8eb4-9e0238ce95f3}" showlabel="true" visible="true" labelid="{5b984fb4-ba51-454d-b8b9-01c189202095}">
+                        <labels>
+                          <label description="Investigation Notes" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_sh_case_sh_caseresolutionprocess:sh_investigationnotes" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="sh_investigationnotes" relationship="bpf_sh_case_sh_caseresolutionprocess" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{bbe61cd9-873d-40ad-a612-a94e75b34411}" name="StageStep19" locklevel="0" expanded="true" visible="false" labelid="{8968d7a7-7d0c-43ae-8b6f-3332fd260f2c}">
+          <labels>
+            <label description="Resolve" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{3dde454a-6e71-603c-3bd5-ad0acafbd162}" name="StageStep19_section1" labelid="{097fa3b9-d7a2-4438-9937-32dbe9164392}">
+                  <labels>
+                    <label description="Resolve" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{c8e6d260-a49f-48da-8845-a105afa91fc4}" showlabel="true" visible="true" labelid="{bec2b333-07af-4973-91e7-1ea74b04cdd5}">
+                        <labels>
+                          <label description="Resolution Details" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_sh_case_sh_caseresolutionprocess:sh_resolutiondetails" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="sh_resolutiondetails" relationship="bpf_sh_case_sh_caseresolutionprocess" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{960ab940-f7b6-4914-b9a7-25c74b0efe3f}" showlabel="true" visible="true" labelid="{d34f7b77-6151-4240-83ea-1e93b883daa5}">
+                        <labels>
+                          <label description="Status" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_sh_case_sh_caseresolutionprocess:sh_status" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="sh_status" relationship="bpf_sh_case_sh_caseresolutionprocess" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ee16afd8-34ad-4012-8b09-fd6092d55e55}" showlabel="true" visible="true" labelid="{d9838a06-ed3d-4a02-bdd9-95ab8ef0ab70}">
+                        <labels>
+                          <label description="Status Reason" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_sh_case_sh_caseresolutionprocess:statuscode" classid="{5d68b988-0661-4db2-bc3e-17598ad3be6c}" datafieldname="statuscode" relationship="bpf_sh_case_sh_caseresolutionprocess" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{9b6fda51-3ae9-4566-85c9-86765b625007}" name="StageStep27" locklevel="0" expanded="true" visible="false" labelid="{80e66d3e-26a6-4b70-a6e9-63376150e25f}">
+          <labels>
+            <label description="Close" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{2f454ea2-4035-c7d3-0fb5-3efa6e93d45d}" name="StageStep27_section1" labelid="{d3779ed4-2a50-47b4-ab0c-63e1a43e5cac}">
+                  <labels>
+                    <label description="Close" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{59fd90ad-c0c3-48c4-a32d-a4a8936fdbaf}" showlabel="true" visible="true" labelid="{3e51f22e-7e1f-4e83-9b03-be34d64f44e7}">
+                        <labels>
+                          <label description="Resolution Confirmed" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_sh_case_sh_caseresolutionprocess:sh_resolutionconfirmed" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="sh_resolutionconfirmed" relationship="bpf_sh_case_sh_caseresolutionprocess" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d447ae79-49d1-4588-aad9-a439dc0efd17}" showlabel="true" visible="true" labelid="{3251ea19-53f5-47ab-97fe-186eedb9a68c}">
+                        <labels>
+                          <label description="Status" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_sh_case_sh_caseresolutionprocess:sh_status" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="sh_status" relationship="bpf_sh_case_sh_caseresolutionprocess" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{44438e91-ba0c-4c3c-9f52-0aae0ccf2338}" showlabel="true" visible="true" labelid="{a3fa902b-9f1f-40f7-a521-fcfaa13264d5}">
+                        <labels>
+                          <label description="Resolved On" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_sh_case_sh_caseresolutionprocess:sh_resolvedon" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="sh_resolvedon" relationship="bpf_sh_case_sh_caseresolutionprocess" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

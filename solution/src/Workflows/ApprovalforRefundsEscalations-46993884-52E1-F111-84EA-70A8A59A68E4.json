@@ -1,0 +1,282 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "sh_sharedcommondataserviceforapps_69677"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_approvals": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "sh_sharedapprovals_de714"
+        },
+        "api": {
+          "name": "shared_approvals"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "8c5e8262-d888-4618-8d1a-76f5a34e3d47"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "sh_case",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "sh_refundamount, sh_escalationrequested"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Condition": {
+          "actions": {
+            "Update_a_row": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "48e1d335-c819-4550-98b0-9e2a26004e89"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateOnlyRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "sh_cases",
+                  "recordId": "@triggerOutputs()?['body/sh_caseid']",
+                  "item/sh_approvalstatus": 126450001
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Get_a_row_by_ID": {
+              "runAfter": {
+                "Update_a_row": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "21eb9024-5331-42dc-adf1-b8ae2c9e75f3"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "systemusers",
+                  "recordId": "@outputs('Update_a_row')?['body/_owninguser_value@Microsoft.Dynamics.CRM.lookuplogicalname']"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Start_and_wait_for_an_approval": {
+              "runAfter": {
+                "Get_a_row_by_ID": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "c3a4215a-0f05-4ef2-9ff1-0d414d984ce5"
+              },
+              "type": "OpenApiConnectionWebhook",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_approvals",
+                  "operationId": "StartAndWaitForAnApproval",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals"
+                },
+                "parameters": {
+                  "approvalType": "Basic",
+                  "WebhookApprovalCreationInput/title": "@triggerOutputs()?['body/sh_casenumber']",
+                  "WebhookApprovalCreationInput/assignedTo": ";",
+                  "WebhookApprovalCreationInput/details": "@{triggerOutputs()?['body/sh_casenumber']}@{triggerOutputs()?['body/sh_refundamount_base']}@{triggerOutputs()?['body/_sh_customer_value']}",
+                  "WebhookApprovalCreationInput/enableNotifications": true,
+                  "WebhookApprovalCreationInput/enableReassignment": true
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Condition_2": {
+              "actions": {
+                "Update_a_row_2": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "1ba1479f-e98b-476f-9c5d-5714a8447db4"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "UpdateOnlyRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "sh_cases",
+                      "recordId": "@triggerOutputs()?['body/sh_caseid']",
+                      "item/sh_approvalstatus": 126450002
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Apply_to_each": {
+                  "foreach": "@outputs('Start_and_wait_for_an_approval')?['body/responses']",
+                  "actions": {
+                    "Add_a_new_row": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "51e9660c-82ac-44f9-b693-221656c81568"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps",
+                          "operationId": "CreateRecord",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "sh_casenotes",
+                          "item/sh_Case@odata.bind": "incidents(@{outputs('Update_a_row_2')?['body/sh_caseid']})",
+                          "item/sh_notesummary": "Refund Approval Decision",
+                          "item/sh_notetext": "@{items('Apply_to_each')?['responder/displayName']}@{items('Apply_to_each')?['comments']}@{utcNow()}"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Update_a_row_2": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "2cb77e99-703d-48b0-86a1-dbe7315af76c"
+                  },
+                  "type": "Foreach"
+                }
+              },
+              "runAfter": {
+                "Start_and_wait_for_an_approval": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Update_a_row_3": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "f1400d3d-f76b-4f81-9749-8cb6ca2f7dd1"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_commondataserviceforapps",
+                        "operationId": "UpdateOnlyRecord",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                      },
+                      "parameters": {
+                        "entityName": "sh_cases",
+                        "recordId": "@triggerOutputs()?['body/sh_caseid']",
+                        "item/sh_approvalstatus": 126450003
+                      },
+                      "authentication": "@parameters('$authentication')"
+                    }
+                  },
+                  "Apply_to_each_2": {
+                    "foreach": "@outputs('Start_and_wait_for_an_approval')?['body/responses']",
+                    "actions": {
+                      "Add_a_new_row_2": {
+                        "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "399031c1-cc82-401d-ada8-81cf50fec8e0"
+                        },
+                        "type": "OpenApiConnection",
+                        "inputs": {
+                          "host": {
+                            "connectionName": "shared_commondataserviceforapps",
+                            "operationId": "CreateRecord",
+                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                          },
+                          "parameters": {
+                            "entityName": "sh_casenotes",
+                            "item/sh_Case@odata.bind": "incidents(@{outputs('Update_a_row_3')?['body/sh_caseid']})",
+                            "item/sh_notesummary": "Refund Rejection Decision",
+                            "item/sh_notetext": "@{items('Apply_to_each_2')?['responder/displayName']}@{items('Apply_to_each_2')?['comments']}@{utcNow()}"
+                          },
+                          "authentication": "@parameters('$authentication')"
+                        }
+                      }
+                    },
+                    "runAfter": {
+                      "Update_a_row_3": [
+                        "Succeeded"
+                      ]
+                    },
+                    "metadata": {
+                      "operationMetadataId": "1e79bcec-e527-4b85-9ec4-ad0ea3edd12f"
+                    },
+                    "type": "Foreach"
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@outputs('Start_and_wait_for_an_approval')?['body/outcome']",
+                  "Approve"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "a7af3c5c-17fa-482e-aff8-318a8f829bf2"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {},
+          "expression": {
+            "greater": [
+              "@triggerOutputs()?['body/sh_refundamount_base']",
+              "@parameters('sh_ApprovalThreshold')"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "8fb46113-7588-4e89-a4ba-96d677cc1c6e"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

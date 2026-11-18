@@ -1,0 +1,179 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "sh_sharedcommondataserviceforapps_69677"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_outlook": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "sh_sharedoutlook_07083"
+        },
+        "api": {
+          "name": "shared_outlook"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "recurrence": {
+            "frequency": "Day",
+            "interval": 1,
+            "startTime": "2026-11-15T14:00:00Z"
+          },
+          "metadata": {
+            "operationMetadataId": "69f9f35e-7a07-433a-8b3c-6181d11a123b"
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "List_-_Open_cases": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "ba7224ad-caf3-4a1e-8ac4-44491bdc79d1"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "sh_cases",
+              "$filter": "statuscode ne <Resolved on>"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runtimeConfiguration": {
+            "paginationPolicy": {
+              "minimumItemCount": 5000
+            }
+          }
+        },
+        "List_-_Overdue_cases": {
+          "runAfter": {
+            "List_-_Open_cases": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f3346699-1f0b-48ca-b49f-5209967aaa40"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "sh_cases",
+              "$filter": "statuscode ne <Resolved value> and <sh_duedate> lt @{utcNow()}"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runtimeConfiguration": {
+            "paginationPolicy": {
+              "minimumItemCount": 5000
+            }
+          }
+        },
+        "Select_-_Case_summary": {
+          "runAfter": {
+            "List_-_Overdue_cases": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "73ebc173-2320-4f76-81da-4d3baafc72e6"
+          },
+          "type": "Select",
+          "inputs": {
+            "from": "@outputs('List_-_Overdue_cases')?['body/value']",
+            "select": {
+              "Case Number": "@item()?['sh_casenumber']",
+              "Priority": "@item()?['sh_priority']",
+              "Owner": "@item()?['_ownerid_value']",
+              "Due Date": "@item()?['sh_duedate']"
+            }
+          }
+        },
+        "Create_HTML_table": {
+          "runAfter": {
+            "Select_-_Case_summary": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d082f4bf-a189-46d3-92e7-ad2793a1e604"
+          },
+          "type": "Table",
+          "inputs": {
+            "from": "@body('Select_-_Case_summary')",
+            "format": "HTML"
+          }
+        },
+        "Compose": {
+          "runAfter": {
+            "Create_HTML_table": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e44e783a-67ad-46f0-9d37-767cdea2f69b"
+          },
+          "type": "Compose",
+          "inputs": "@length(body('List_-_Open_cases')?['value'])"
+        },
+        "Send_an_email_(V2)": {
+          "runAfter": {
+            "Compose": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0c80e77b-2cc0-45ce-8ca7-3c6f7f9188ed"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_outlook",
+              "operationId": "SendEmailV2",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_outlook"
+            },
+            "parameters": {
+              "emailMessage/To": "devakimachineni_gmail.com#EXT#@devakimachinenigmail.onmicrosoft.com",
+              "emailMessage/Subject": "Daily Case Summary - Open & Overdue Cases ",
+              "emailMessage/Body": "<p>Good Morning,<br>\n<br>\nHere is today's daily case summary:<br>\n- Total Cases: [Outputs] &nbsp;&nbsp;&nbsp;&nbsp;&lt;-- Select \"Outputs\" from your Compose action in Dynamic content<br>\nCase Details: [Output] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;-- Select \"Output\" from your Create HTML table action in Dynamic content</p>",
+              "emailMessage/Importance": "Normal"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}
